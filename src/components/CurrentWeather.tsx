@@ -17,7 +17,7 @@ import {
   formatDate, 
   formatVisibility,
   getWindDirection,
-  getWeatherIconUrl,
+  getWeatherEmoji,
   getTempColorClass
 } from '../utils';
 
@@ -94,18 +94,16 @@ export const CurrentWeather = ({ data }: CurrentWeatherProps) => {
 
       {/* Main Weather Display */}
       <div className="flex flex-col items-center justify-center gap-2 sm:gap-4 md:gap-6 mb-4 sm:mb-6 md:mb-8">
-        {/* Weather Icon */}
+        {/* Weather Icon - Emoji */}
         <motion.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ type: 'spring', stiffness: 200, damping: 15, delay: 0.3 }}
           className="relative"
         >
-          <img
-            src={getWeatherIconUrl(data.weather[0].icon, '4x')}
-            alt={data.weather[0].description}
-            className="w-28 h-28 sm:w-36 sm:h-36 md:w-40 md:h-40 lg:w-48 lg:h-48 drop-shadow-2xl animate-float"
-          />
+          <span className="text-7xl sm:text-8xl md:text-9xl lg:text-[10rem] drop-shadow-2xl animate-float block">
+            {getWeatherEmoji(data.weather[0].icon)}
+          </span>
           <div 
             className={`absolute inset-0 rounded-full blur-3xl opacity-30 ${
               isNight ? 'bg-blue-400' : 'bg-yellow-400'

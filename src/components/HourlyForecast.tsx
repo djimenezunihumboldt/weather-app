@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import type { ForecastItem } from '../types';
 import { useWeatherStore } from '../store';
-import { formatTemperature, formatHour, getWeatherIconUrl } from '../utils';
+import { formatTemperature, formatHour, getWeatherEmoji } from '../utils';
 
 interface HourlyForecastProps {
   data: ForecastItem[];
@@ -44,12 +44,10 @@ export const HourlyForecast = ({ data }: HourlyForecastProps) => {
                 {index === 0 ? 'Ahora' : formatHour(item.dt, language)}
               </p>
 
-              {/* Weather Icon */}
-              <img
-                src={getWeatherIconUrl(item.weather[0].icon, '2x')}
-                alt={item.weather[0].description}
-                className="w-10 h-10 sm:w-12 sm:h-12 mx-auto"
-              />
+              {/* Weather Icon - Emoji */}
+              <span className="text-3xl sm:text-4xl block mx-auto">
+                {getWeatherEmoji(item.weather[0].icon)}
+              </span>
 
               {/* Temperature */}
               <p className="text-white font-semibold text-sm sm:text-base mt-1">

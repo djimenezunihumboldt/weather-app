@@ -218,7 +218,47 @@ export const getTempColorClass = (temp: number): string => {
 };
 
 /**
- * Get weather icon URL
+ * Weather icon mapping - OpenWeather icon codes to emojis
+ */
+const WEATHER_EMOJIS: Record<string, string> = {
+  // Clear sky
+  '01d': '☀️',
+  '01n': '🌙',
+  // Few clouds
+  '02d': '⛅',
+  '02n': '☁️',
+  // Scattered clouds
+  '03d': '☁️',
+  '03n': '☁️',
+  // Broken clouds
+  '04d': '☁️',
+  '04n': '☁️',
+  // Shower rain
+  '09d': '🌧️',
+  '09n': '🌧️',
+  // Rain
+  '10d': '🌦️',
+  '10n': '🌧️',
+  // Thunderstorm
+  '11d': '⛈️',
+  '11n': '⛈️',
+  // Snow
+  '13d': '❄️',
+  '13n': '❄️',
+  // Mist/fog
+  '50d': '🌫️',
+  '50n': '🌫️',
+};
+
+/**
+ * Get weather emoji from icon code
+ */
+export const getWeatherEmoji = (iconCode: string): string => {
+  return WEATHER_EMOJIS[iconCode] || '🌡️';
+};
+
+/**
+ * Get weather icon URL (legacy - kept for compatibility)
  */
 export const getWeatherIconUrl = (
   iconCode: string,

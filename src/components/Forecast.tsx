@@ -6,7 +6,7 @@ import {
   formatTemperature, 
   getDayName, 
   processDailyForecast,
-  getWeatherIconUrl 
+  getWeatherEmoji 
 } from '../utils';
 
 interface ForecastProps {
@@ -45,11 +45,9 @@ export const Forecast = ({ data }: ForecastProps) => {
                 {getDayName(day.date.getTime() / 1000, language)}
               </p>
 
-              <img
-                src={getWeatherIconUrl(day.icon, '2x')}
-                alt={day.description}
-                className="w-12 h-12 mx-auto"
-              />
+              <span className="text-3xl block mx-auto my-1">
+                {getWeatherEmoji(day.icon)}
+              </span>
 
               <div className="flex items-center justify-center gap-1 text-sm mb-1">
                 <span className="text-white font-semibold">
@@ -96,11 +94,9 @@ export const Forecast = ({ data }: ForecastProps) => {
               {getDayName(day.date.getTime() / 1000, language)}
             </p>
 
-            <img
-              src={getWeatherIconUrl(day.icon, '2x')}
-              alt={day.description}
-              className="w-14 h-14 sm:w-16 sm:h-16 mx-auto"
-            />
+            <span className="text-4xl sm:text-5xl block mx-auto my-2">
+              {getWeatherEmoji(day.icon)}
+            </span>
 
             <div className="flex items-center justify-center gap-2 mb-2">
               <span className="text-white font-semibold text-sm sm:text-base">
