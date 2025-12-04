@@ -80,9 +80,9 @@ export const WeatherDetails = ({ data }: WeatherDetailsProps) => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.4 }}
-      className="mt-8"
+      className="mt-6 sm:mt-8 w-full"
     >
-      <h3 className="text-lg font-medium text-white mb-4">
+      <h3 className="text-lg font-semibold text-white mb-4">
         Detalles del clima
       </h3>
 

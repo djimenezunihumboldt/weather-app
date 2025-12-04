@@ -195,21 +195,25 @@ function WeatherApp() {
   }
 
   return (
-    <div className="min-h-screen min-h-dvh relative safe-area-top safe-area-bottom">
+    <div className="min-h-screen min-h-dvh relative safe-area-top safe-area-bottom flex flex-col">
       {/* Dynamic Weather Background */}
       <WeatherBackground condition={weatherCondition} isDay={!isNight} />
 
       {/* Main Content */}
-      <div className="relative z-10 w-full max-w-4xl mx-auto px-3 sm:px-4 md:px-6 py-4 sm:py-6">
+      <div className="relative z-10 w-full max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 flex-1 flex flex-col">
         {/* Header */}
-        <Header
-          currentCity={currentCity}
-          onRefresh={handleRefresh}
-          isRefreshing={isRefreshing}
-        />
+        <div className="w-full">
+          <Header
+            currentCity={currentCity}
+            onRefresh={handleRefresh}
+            isRefreshing={isRefreshing}
+          />
+        </div>
 
         {/* Search Bar */}
-        <SearchBar onSelectCity={handleCitySelect} />
+        <div className="w-full flex justify-center">
+          <SearchBar onSelectCity={handleCitySelect} />
+        </div>
 
         {/* Error Display */}
         <AnimatePresence mode="wait">

@@ -19,9 +19,9 @@ export const HourlyForecast = ({ data }: HourlyForecastProps) => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: 0.2 }}
-      className="mt-4 sm:mt-6"
+      className="mt-6 sm:mt-8 w-full"
     >
-      <h3 className="text-base sm:text-lg font-medium text-white mb-3 sm:mb-4 px-1">
+      <h3 className="text-base sm:text-lg font-semibold text-white mb-3 sm:mb-4">
         Próximas 24 horas
       </h3>
 

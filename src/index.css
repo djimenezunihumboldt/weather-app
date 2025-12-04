@@ -22,13 +22,13 @@ html {
 /* Responsive font sizing */
 @media (max-width: 640px) {
   html {
-    font-size: 14px;
+    font-size: 15px;
   }
 }
 
 @media (max-width: 380px) {
   html {
-    font-size: 13px;
+    font-size: 14px;
   }
 }
 
@@ -39,11 +39,16 @@ body {
   overflow-x: hidden;
   min-height: 100vh;
   min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
 }
 
 #root {
   min-height: 100vh;
   min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 /* Custom Scrollbar */

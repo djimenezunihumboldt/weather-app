@@ -19,9 +19,9 @@ export const FavoritesList = ({ onSelectCity }: FavoritesListProps) => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.4 }}
-      className="mt-8"
+      className="mt-6 sm:mt-8 w-full"
     >
-      <h3 className="text-lg font-medium text-white mb-4 flex items-center gap-2">
+      <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
         <Star className="w-5 h-5 text-yellow-400" />
         Ciudades favoritas
       </h3>

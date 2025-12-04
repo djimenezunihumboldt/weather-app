@@ -33,7 +33,7 @@ export const Header = ({ currentCity, onRefresh, isRefreshing }: HeaderProps) =>
     <motion.header
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="flex items-center justify-between mb-4 sm:mb-6 px-1"
+      className="flex items-center justify-between mb-6 w-full"
     >
       {/* Logo & Title */}
       <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
