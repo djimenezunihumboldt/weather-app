@@ -13,3 +13,5 @@ export { AirQuality } from './AirQuality';
 export { UVIndex } from './UVIndex';
 export { TemperatureChart } from './TemperatureChart';
 export { WeatherSummary } from './WeatherSummary';
+export { QuickCities } from './QuickCities';
+export { ShareWeather } from './ShareWeather';

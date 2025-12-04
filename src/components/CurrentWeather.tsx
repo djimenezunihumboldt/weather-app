@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import type { WeatherData } from '../types';
 import { useWeatherStore } from '../store';
+import { ShareWeather } from './ShareWeather';
 import { 
   formatTemperature, 
   formatDate, 
@@ -54,7 +55,7 @@ export const CurrentWeather = ({ data }: CurrentWeatherProps) => {
       transition={{ duration: 0.5 }}
       className="text-center w-full"
     >
-      {/* Location & Favorite */}
+      {/* Location & Favorite & Share */}
       <div className="flex items-center justify-center gap-2 sm:gap-3 mb-1 sm:mb-2 flex-wrap">
         <motion.h1 
           className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white text-shadow"
@@ -64,18 +65,21 @@ export const CurrentWeather = ({ data }: CurrentWeatherProps) => {
         >
           {data.name}, {data.sys.country}
         </motion.h1>
-        <motion.button
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          onClick={handleToggleFavorite}
-          className={`p-1.5 sm:p-2 rounded-full transition-colors ${
-            isFav ? 'bg-yellow-500/20' : 'bg-white/10 hover:bg-white/20'
-          }`}
-        >
-          <Star
-            className={`w-5 h-5 sm:w-6 sm:h-6 ${isFav ? 'text-yellow-400 fill-yellow-400' : 'text-white/60'}`}
-          />
-        </motion.button>
+        <div className="flex items-center gap-1">
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            onClick={handleToggleFavorite}
+            className={`p-1.5 sm:p-2 rounded-full transition-colors ${
+              isFav ? 'bg-yellow-500/20' : 'bg-white/10 hover:bg-white/20'
+            }`}
+          >
+            <Star
+              className={`w-5 h-5 sm:w-6 sm:h-6 ${isFav ? 'text-yellow-400 fill-yellow-400' : 'text-white/60'}`}
+            />
+          </motion.button>
+          <ShareWeather weatherData={data} />
+        </div>
       </div>
 
       {/* Date & Time */}

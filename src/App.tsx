@@ -15,6 +15,7 @@ import {
   AirQuality,
   TemperatureChart,
   WeatherSummary,
+  QuickCities,
 } from './components';
 import { useCurrentWeather, useForecast, useGeolocation, useAirQuality } from './hooks';
 import { useWeatherStore } from './store';
@@ -229,6 +230,9 @@ function WeatherApp() {
         <div className="w-full flex justify-center">
           <SearchBar onSelectCity={handleCitySelect} />
         </div>
+
+        {/* Quick Cities - Venezuelan cities */}
+        <QuickCities onSelectCity={handleCitySelect} currentCity={currentCity} />
 
         {/* Error Display */}
         <AnimatePresence mode="wait">
