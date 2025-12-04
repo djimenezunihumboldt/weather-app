@@ -29,10 +29,19 @@ const queryClient = new QueryClient({
   },
 });
 
+// Default city if geolocation fails
+const DEFAULT_CITY: City = {
+  name: 'Caracas',
+  country: 'VE',
+  lat: 10.4806,
+  lon: -66.9036,
+};
+
 function WeatherApp() {
   const { currentCity, setCurrentCity, settings } = useWeatherStore();
   const [isInitialLoad, setIsInitialLoad] = useState(true);
   const [isRefreshing, setIsRefreshing] = useState(false);
+  const [geoTimeout, setGeoTimeout] = useState(false);
 
   // Geolocation hook
   const {
@@ -83,11 +92,25 @@ function WeatherApp() {
     }
   }, [geoLocation, currentCity, setCurrentCity]);
 
-  // Initial load - try geolocation first
+  // Handle geolocation error or timeout - use default city
+  useEffect(() => {
+    if ((geoError || geoTimeout) && !currentCity) {
+      setCurrentCity(DEFAULT_CITY);
+    }
+  }, [geoError, geoTimeout, currentCity, setCurrentCity]);
+
+  // Initial load - try geolocation first with timeout
   useEffect(() => {
     if (isInitialLoad && !currentCity) {
       requestLocation();
       setIsInitialLoad(false);
+      
+      // Set timeout fallback after 5 seconds
+      const timeout = setTimeout(() => {
+        setGeoTimeout(true);
+      }, 5000);
+      
+      return () => clearTimeout(timeout);
     }
   }, [isInitialLoad, currentCity, requestLocation]);
 
