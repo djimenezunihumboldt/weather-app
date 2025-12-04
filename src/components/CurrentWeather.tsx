@@ -52,12 +52,12 @@ export const CurrentWeather = ({ data }: CurrentWeatherProps) => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="text-center"
+      className="text-center px-2 sm:px-0"
     >
       {/* Location & Favorite */}
-      <div className="flex items-center justify-center gap-3 mb-2">
+      <div className="flex items-center justify-center gap-2 sm:gap-3 mb-1 sm:mb-2 flex-wrap">
         <motion.h1 
-          className="text-3xl md:text-4xl font-bold text-white text-shadow"
+          className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-white text-shadow"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.1 }}
@@ -68,19 +68,19 @@ export const CurrentWeather = ({ data }: CurrentWeatherProps) => {
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
           onClick={handleToggleFavorite}
-          className={`p-2 rounded-full transition-colors ${
+          className={`p-1.5 sm:p-2 rounded-full transition-colors ${
             isFav ? 'bg-yellow-500/20' : 'bg-white/10 hover:bg-white/20'
           }`}
         >
           <Star
-            className={`w-6 h-6 ${isFav ? 'text-yellow-400 fill-yellow-400' : 'text-white/60'}`}
+            className={`w-5 h-5 sm:w-6 sm:h-6 ${isFav ? 'text-yellow-400 fill-yellow-400' : 'text-white/60'}`}
           />
         </motion.button>
       </div>
 
       {/* Date & Time */}
       <motion.p 
-        className="text-white/70 text-lg mb-6"
+        className="text-white/70 text-sm sm:text-base md:text-lg mb-4 sm:mb-6"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2 }}
@@ -89,7 +89,7 @@ export const CurrentWeather = ({ data }: CurrentWeatherProps) => {
       </motion.p>
 
       {/* Main Weather Display */}
-      <div className="flex flex-col md:flex-row items-center justify-center gap-6 mb-8">
+      <div className="flex flex-col items-center justify-center gap-2 sm:gap-4 md:gap-6 mb-4 sm:mb-6 md:mb-8">
         {/* Weather Icon */}
         <motion.div
           initial={{ scale: 0 }}
@@ -98,11 +98,10 @@ export const CurrentWeather = ({ data }: CurrentWeatherProps) => {
           className="relative"
         >
           <img
-            src={getWeatherIconUrl(data.weather[0].icon)}
+            src={getWeatherIconUrl(data.weather[0].icon, '4x')}
             alt={data.weather[0].description}
-            className="w-40 h-40 md:w-48 md:h-48 drop-shadow-2xl animate-float"
+            className="w-28 h-28 sm:w-36 sm:h-36 md:w-40 md:h-40 lg:w-48 lg:h-48 drop-shadow-2xl animate-float"
           />
-          {/* Glow effect */}
           <div 
             className={`absolute inset-0 rounded-full blur-3xl opacity-30 ${
               isNight ? 'bg-blue-400' : 'bg-yellow-400'
@@ -112,19 +111,19 @@ export const CurrentWeather = ({ data }: CurrentWeatherProps) => {
 
         {/* Temperature */}
         <motion.div
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4 }}
-          className="text-center md:text-left"
+          className="text-center"
         >
-          <p className={`text-8xl md:text-9xl font-thin text-white text-shadow-lg ${getTempColorClass(data.main.temp)}`}>
+          <p className={`text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-thin text-white text-shadow-lg ${getTempColorClass(data.main.temp)}`}>
             {formatTemperature(data.main.temp, temperatureUnit)}
           </p>
-          <p className="text-2xl text-white/80 capitalize mt-2">
+          <p className="text-lg sm:text-xl md:text-2xl text-white/80 capitalize mt-1 sm:mt-2">
             {data.weather[0].description}
           </p>
-          <p className="text-white/60 mt-1">
-            <Thermometer className="w-4 h-4 inline mr-1" />
+          <p className="text-white/60 text-sm sm:text-base mt-1 flex items-center justify-center gap-1">
+            <Thermometer className="w-3 h-3 sm:w-4 sm:h-4" />
             Sensación: {formatTemperature(data.main.feels_like, temperatureUnit)}
           </p>
         </motion.div>
@@ -135,7 +134,7 @@ export const CurrentWeather = ({ data }: CurrentWeatherProps) => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.5 }}
-        className="flex items-center justify-center gap-6 mb-8 text-white/80"
+        className="flex items-center justify-center gap-3 sm:gap-4 md:gap-6 mb-4 sm:mb-6 md:mb-8 text-white/80 text-sm sm:text-base"
       >
         <span>↓ Mín: {formatTemperature(data.main.temp_min, temperatureUnit)}</span>
         <span className="w-px h-4 bg-white/30" />
@@ -147,37 +146,37 @@ export const CurrentWeather = ({ data }: CurrentWeatherProps) => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.6 }}
-        className="grid grid-cols-2 md:grid-cols-4 gap-4"
+        className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 md:gap-4"
       >
         {/* Humidity */}
-        <div className="glass rounded-2xl p-4">
-          <Droplets className="w-6 h-6 text-blue-300 mx-auto mb-2" />
-          <p className="text-white/60 text-sm">Humedad</p>
-          <p className="text-white text-xl font-semibold">{data.main.humidity}%</p>
+        <div className="glass rounded-xl sm:rounded-2xl p-3 sm:p-4">
+          <Droplets className="w-5 h-5 sm:w-6 sm:h-6 text-blue-300 mx-auto mb-1 sm:mb-2" />
+          <p className="text-white/60 text-xs sm:text-sm">Humedad</p>
+          <p className="text-white text-base sm:text-lg md:text-xl font-semibold">{data.main.humidity}%</p>
         </div>
 
         {/* Wind */}
-        <div className="glass rounded-2xl p-4">
-          <Wind className="w-6 h-6 text-cyan-300 mx-auto mb-2" />
-          <p className="text-white/60 text-sm">Viento</p>
-          <p className="text-white text-xl font-semibold">
+        <div className="glass rounded-xl sm:rounded-2xl p-3 sm:p-4">
+          <Wind className="w-5 h-5 sm:w-6 sm:h-6 text-cyan-300 mx-auto mb-1 sm:mb-2" />
+          <p className="text-white/60 text-xs sm:text-sm">Viento</p>
+          <p className="text-white text-base sm:text-lg md:text-xl font-semibold">
             {Math.round(data.wind.speed * 3.6)} km/h
           </p>
-          <p className="text-white/50 text-xs">{getWindDirection(data.wind.deg, language)}</p>
+          <p className="text-white/50 text-xs hidden sm:block">{getWindDirection(data.wind.deg, language)}</p>
         </div>
 
         {/* Visibility */}
-        <div className="glass rounded-2xl p-4">
-          <Eye className="w-6 h-6 text-purple-300 mx-auto mb-2" />
-          <p className="text-white/60 text-sm">Visibilidad</p>
-          <p className="text-white text-xl font-semibold">{formatVisibility(data.visibility)}</p>
+        <div className="glass rounded-xl sm:rounded-2xl p-3 sm:p-4">
+          <Eye className="w-5 h-5 sm:w-6 sm:h-6 text-purple-300 mx-auto mb-1 sm:mb-2" />
+          <p className="text-white/60 text-xs sm:text-sm">Visibilidad</p>
+          <p className="text-white text-base sm:text-lg md:text-xl font-semibold">{formatVisibility(data.visibility)}</p>
         </div>
 
         {/* Pressure */}
-        <div className="glass rounded-2xl p-4">
-          <Gauge className="w-6 h-6 text-green-300 mx-auto mb-2" />
-          <p className="text-white/60 text-sm">Presión</p>
-          <p className="text-white text-xl font-semibold">{data.main.pressure} hPa</p>
+        <div className="glass rounded-xl sm:rounded-2xl p-3 sm:p-4">
+          <Gauge className="w-5 h-5 sm:w-6 sm:h-6 text-green-300 mx-auto mb-1 sm:mb-2" />
+          <p className="text-white/60 text-xs sm:text-sm">Presión</p>
+          <p className="text-white text-base sm:text-lg md:text-xl font-semibold">{data.main.pressure} hPa</p>
         </div>
       </motion.div>
 
@@ -186,15 +185,15 @@ export const CurrentWeather = ({ data }: CurrentWeatherProps) => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.7 }}
-        className="flex items-center justify-center gap-8 mt-6"
+        className="flex items-center justify-center gap-4 sm:gap-6 md:gap-8 mt-4 sm:mt-6"
       >
-        <div className="flex items-center gap-2 text-white/70">
-          <Sunrise className="w-5 h-5 text-orange-300" />
+        <div className="flex items-center gap-1.5 sm:gap-2 text-white/70 text-sm sm:text-base">
+          <Sunrise className="w-4 h-4 sm:w-5 sm:h-5 text-orange-300" />
           <span>{formatDate(data.sys.sunrise, 'HH:mm', language)}</span>
         </div>
         <div className="w-px h-4 bg-white/30" />
-        <div className="flex items-center gap-2 text-white/70">
-          <Sunset className="w-5 h-5 text-orange-500" />
+        <div className="flex items-center gap-1.5 sm:gap-2 text-white/70 text-sm sm:text-base">
+          <Sunset className="w-4 h-4 sm:w-5 sm:h-5 text-orange-500" />
           <span>{formatDate(data.sys.sunset, 'HH:mm', language)}</span>
         </div>
       </motion.div>

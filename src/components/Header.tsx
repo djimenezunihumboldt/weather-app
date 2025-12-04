@@ -33,49 +33,49 @@ export const Header = ({ currentCity, onRefresh, isRefreshing }: HeaderProps) =>
     <motion.header
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="flex items-center justify-between mb-6"
+      className="flex items-center justify-between mb-4 sm:mb-6 px-1"
     >
       {/* Logo & Title */}
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
         <motion.div
           animate={{ rotate: [0, 360] }}
           transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-          className="text-4xl"
+          className="text-2xl sm:text-3xl md:text-4xl flex-shrink-0"
         >
           🌤️
         </motion.div>
-        <div>
-          <h1 className="text-2xl font-bold text-white">
+        <div className="min-w-0">
+          <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-white truncate">
             Weather App
           </h1>
           {currentCity && (
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="text-white/60 text-sm flex items-center gap-1"
+              className="text-white/60 text-xs sm:text-sm flex items-center gap-1 truncate"
             >
-              <MapPin className="w-3 h-3" />
-              {currentCity.name}, {currentCity.country}
+              <MapPin className="w-3 h-3 flex-shrink-0" />
+              <span className="truncate">{currentCity.name}, {currentCity.country}</span>
             </motion.p>
           )}
         </div>
       </div>
 
       {/* Actions */}
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-1 sm:gap-2 flex-shrink-0">
         {/* Favorite Toggle */}
         {currentCity && (
           <motion.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={handleFavoriteToggle}
-            className="p-2 glass rounded-full hover:bg-white/20 transition-colors"
+            className="p-1.5 sm:p-2 glass rounded-full hover:bg-white/20 transition-colors"
             aria-label={isCurrentFavorite ? 'Quitar de favoritos' : 'Añadir a favoritos'}
           >
             {isCurrentFavorite ? (
-              <Heart className="w-5 h-5 text-red-400 fill-red-400" />
+              <Heart className="w-4 h-4 sm:w-5 sm:h-5 text-red-400 fill-red-400" />
             ) : (
-              <HeartOff className="w-5 h-5 text-white" />
+              <HeartOff className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
             )}
           </motion.button>
         )}
@@ -86,14 +86,14 @@ export const Header = ({ currentCity, onRefresh, isRefreshing }: HeaderProps) =>
           whileTap={{ scale: 0.9 }}
           onClick={onRefresh}
           disabled={isRefreshing}
-          className="p-2 glass rounded-full hover:bg-white/20 transition-colors disabled:opacity-50"
+          className="p-1.5 sm:p-2 glass rounded-full hover:bg-white/20 transition-colors disabled:opacity-50"
           aria-label="Actualizar"
         >
           <motion.div
             animate={isRefreshing ? { rotate: 360 } : {}}
             transition={{ duration: 1, repeat: isRefreshing ? Infinity : 0, ease: 'linear' }}
           >
-            <RefreshCw className="w-5 h-5 text-white" />
+            <RefreshCw className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
           </motion.div>
         </motion.button>
 

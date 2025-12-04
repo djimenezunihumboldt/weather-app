@@ -143,12 +143,12 @@ function WeatherApp() {
   }
 
   return (
-    <div className="min-h-screen relative">
+    <div className="min-h-screen min-h-dvh relative safe-area-top safe-area-bottom">
       {/* Dynamic Weather Background */}
       <WeatherBackground condition={weatherCondition} isDay={!isNight} />
 
       {/* Main Content */}
-      <div className="relative z-10 max-w-4xl mx-auto px-4 py-6">
+      <div className="relative z-10 w-full max-w-4xl mx-auto px-3 sm:px-4 md:px-6 py-4 sm:py-6">
         {/* Header */}
         <Header
           currentCity={currentCity}
@@ -167,7 +167,7 @@ function WeatherApp() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="mt-8"
+              className="mt-4 sm:mt-8"
             >
               <ErrorDisplay
                 message={
@@ -218,7 +218,7 @@ function WeatherApp() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1 }}
-          className="mt-12 text-center text-white/40 text-sm"
+          className="mt-8 sm:mt-12 pb-4 text-center text-white/40 text-xs sm:text-sm"
         >
           <p>
             Datos proporcionados por{' '}
