@@ -39,9 +39,9 @@ const DEFAULT_CITY: City = {
 
 function WeatherApp() {
   const { currentCity, setCurrentCity, settings } = useWeatherStore();
-  const [isInitialLoad, setIsInitialLoad] = useState(true);
   const [isRefreshing, setIsRefreshing] = useState(false);
-  const [geoTimeout, setGeoTimeout] = useState(false);
+  const [hasTriedGeo, setHasTriedGeo] = useState(false);
+  const [forceShowApp, setForceShowApp] = useState(false);
 
   // Geolocation hook
   const {
@@ -80,6 +80,48 @@ function WeatherApp() {
     }
   );
 
+  // Initial load - try geolocation OR use default city
+  useEffect(() => {
+    if (!hasTriedGeo && !currentCity) {
+      setHasTriedGeo(true);
+      
+      // Try geolocation with a timeout
+      const geoPromise = requestLocation();
+      
+      // Fallback to default city after 3 seconds
+      const timeoutId = setTimeout(() => {
+        if (!currentCity) {
+          console.log('Geolocation timeout, using default city');
+          setCurrentCity(DEFAULT_CITY);
+          setForceShowApp(true);
+        }
+      }, 3000);
+      
+      // If geolocation succeeds, clear the timeout
+      geoPromise.then((result) => {
+        if (result) {
+          clearTimeout(timeoutId);
+        }
+      }).catch(() => {
+        // Error handled by timeout
+      });
+      
+      return () => clearTimeout(timeoutId);
+    }
+  }, [hasTriedGeo, currentCity, requestLocation, setCurrentCity]);
+
+  // Fallback timer - force show app after 5 seconds no matter what
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (!currentCity) {
+        setCurrentCity(DEFAULT_CITY);
+      }
+      setForceShowApp(true);
+    }, 5000);
+    
+    return () => clearTimeout(timer);
+  }, [currentCity, setCurrentCity]);
+
   // Handle geolocation result
   useEffect(() => {
     if (geoLocation && !currentCity) {
@@ -92,27 +134,13 @@ function WeatherApp() {
     }
   }, [geoLocation, currentCity, setCurrentCity]);
 
-  // Handle geolocation error or timeout - use default city
+  // Handle geolocation error - use default city immediately
   useEffect(() => {
-    if ((geoError || geoTimeout) && !currentCity) {
+    if (geoError && !currentCity) {
+      console.log('Geolocation error, using default city:', geoError);
       setCurrentCity(DEFAULT_CITY);
     }
-  }, [geoError, geoTimeout, currentCity, setCurrentCity]);
-
-  // Initial load - try geolocation first with timeout
-  useEffect(() => {
-    if (isInitialLoad && !currentCity) {
-      requestLocation();
-      setIsInitialLoad(false);
-      
-      // Set timeout fallback after 5 seconds
-      const timeout = setTimeout(() => {
-        setGeoTimeout(true);
-      }, 5000);
-      
-      return () => clearTimeout(timeout);
-    }
-  }, [isInitialLoad, currentCity, requestLocation]);
+  }, [geoError, currentCity, setCurrentCity]);
 
   // Handle search selection
   const handleCitySelect = useCallback((city: City) => {
@@ -160,8 +188,9 @@ function WeatherApp() {
   const isLoading = isGeoLoading || (currentCity && (isWeatherLoading || isForecastLoading));
   const hasError = weatherError || forecastError || geoError;
 
-  // Show loading screen on initial load
-  if (isInitialLoad || (isLoading && !weatherData)) {
+  // Show loading screen only while getting initial data
+  // Force show app after timeout to prevent infinite loading
+  if (!forceShowApp && !weatherData && isLoading && !hasError) {
     return <LoadingScreen />;
   }
 
