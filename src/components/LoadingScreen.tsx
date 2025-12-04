@@ -2,17 +2,17 @@ import { motion } from 'framer-motion';
 
 export const LoadingScreen = () => {
   return (
-    <div className="fixed inset-0 bg-gradient-to-br from-blue-500 via-sky-600 to-cyan-500 flex items-center justify-center">
+    <div className="fixed inset-0 bg-gradient-to-br from-yellow-500 via-blue-600 to-red-500 flex items-center justify-center">
       <motion.div
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         className="text-center"
       >
-        {/* Animated Weather Icon */}
+        {/* Animated Venezuela Flag */}
         <motion.div
           animate={{
             y: [0, -10, 0],
-            rotate: [0, 5, -5, 0],
+            scale: [1, 1.1, 1],
           }}
           transition={{
             duration: 2,
@@ -21,17 +21,24 @@ export const LoadingScreen = () => {
           }}
           className="text-8xl mb-6"
         >
-          🌤️
+          🇻🇪
         </motion.div>
 
         {/* Loading Text */}
         <motion.h2
           animate={{ opacity: [0.5, 1, 0.5] }}
           transition={{ duration: 1.5, repeat: Infinity }}
-          className="text-white text-2xl font-semibold mb-4"
+          className="text-white text-2xl font-semibold mb-2"
         >
-          Cargando clima...
+          <span className="text-yellow-300">Clima</span><span className="text-white">Vzla</span>
         </motion.h2>
+        <motion.p
+          animate={{ opacity: [0.3, 0.7, 0.3] }}
+          transition={{ duration: 1.5, repeat: Infinity }}
+          className="text-white/70 text-sm mb-4"
+        >
+          Cargando el clima...
+        </motion.p>
 
         {/* Loading Dots */}
         <div className="flex justify-center gap-2">

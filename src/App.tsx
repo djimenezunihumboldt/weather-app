@@ -320,7 +320,7 @@ function WeatherApp() {
             </a>
           </p>
           <p className="mt-1">
-            Weather App © {new Date().getFullYear()} • Hecho con ❤️
+            <span className="text-yellow-400/60">Clima</span><span className="text-blue-400/60">Vzla</span> © {new Date().getFullYear()} • Hecho con ❤️ en Venezuela 🇻🇪
           </p>
         </motion.footer>
       </div>

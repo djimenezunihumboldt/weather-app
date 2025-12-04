@@ -38,15 +38,15 @@ export const Header = ({ currentCity, onRefresh, isRefreshing }: HeaderProps) =>
       {/* Logo & Title */}
       <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
         <motion.div
-          animate={{ rotate: [0, 360] }}
-          transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
+          animate={{ scale: [1, 1.1, 1] }}
+          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
           className="text-2xl sm:text-3xl md:text-4xl flex-shrink-0"
         >
-          🌤️
+          🇻🇪
         </motion.div>
         <div className="min-w-0">
           <h1 className="text-lg sm:text-xl md:text-2xl font-bold text-white truncate">
-            Weather App
+            <span className="text-yellow-400">Clima</span><span className="text-blue-400">Vzla</span>
           </h1>
           {currentCity && (
             <motion.p
