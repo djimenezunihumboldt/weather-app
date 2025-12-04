@@ -87,7 +87,7 @@ export const WeatherDetails = ({ data }: WeatherDetailsProps) => {
       </h3>
 
       {/* Main Details Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-3 mb-6">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 lg:gap-4 mb-6">
         {details.map((detail, index) => (
           <motion.div
             key={detail.label}

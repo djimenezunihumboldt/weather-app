@@ -80,7 +80,7 @@ export const Forecast = ({ data }: ForecastProps) => {
       </div>
 
       {/* Desktop: Grid layout */}
-      <div className="hidden sm:grid sm:grid-cols-3 md:grid-cols-5 gap-2 sm:gap-3">
+      <div className="hidden sm:grid sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-5 gap-3 lg:gap-4">
         {dailyForecasts.map((day, index) => (
           <motion.div
             key={day.date.toISOString()}

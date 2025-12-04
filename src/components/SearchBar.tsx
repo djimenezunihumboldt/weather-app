@@ -47,7 +47,7 @@ export const SearchBar = ({ onSelectCity }: SearchBarProps) => {
   }, [query]);
 
   return (
-    <div className="relative w-full max-w-lg mb-6">
+    <div className="relative w-full max-w-lg lg:max-w-xl mb-6">
       {/* Search Input */}
       <div className="relative">
         <Search className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 text-white/60" />

@@ -215,8 +215,8 @@ function WeatherApp() {
       {/* Dynamic Weather Background */}
       <WeatherBackground condition={weatherCondition} isDay={!isNight} />
 
-      {/* Main Content */}
-      <div className="relative z-10 w-full max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 flex-1 flex flex-col">
+      {/* Main Content - Centered with max width for large screens */}
+      <div className="relative z-10 w-full max-w-4xl lg:max-w-5xl xl:max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 py-6 sm:py-8 lg:py-10 flex-1 flex flex-col">
         {/* Header */}
         <div className="w-full">
           <Header

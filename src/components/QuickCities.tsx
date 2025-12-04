@@ -24,23 +24,23 @@ const VENEZUELAN_CITIES: City[] = [
 ];
 
 export const QuickCities = ({ onSelectCity, currentCity }: QuickCitiesProps) => {
-  // Filter out current city and limit to 6 cities for display
+  // Filter out current city - show more on desktop
   const citiesToShow = VENEZUELAN_CITIES
     .filter(city => city.name !== currentCity?.name)
-    .slice(0, 6);
+    .slice(0, 8);
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.3 }}
-      className="mb-6"
+      className="mb-6 lg:mb-8"
     >
-      <p className="text-white/50 text-xs mb-2 flex items-center gap-1">
-        <MapPin className="w-3 h-3" />
+      <p className="text-white/50 text-xs lg:text-sm mb-2 lg:mb-3 flex items-center gap-1">
+        <MapPin className="w-3 h-3 lg:w-4 lg:h-4" />
         Ciudades de Venezuela
       </p>
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-2 lg:gap-3 justify-center lg:justify-start">
         {citiesToShow.map((city, index) => (
           <motion.button
             key={city.name}
@@ -50,7 +50,7 @@ export const QuickCities = ({ onSelectCity, currentCity }: QuickCitiesProps) => 
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => onSelectCity(city)}
-            className="px-3 py-1.5 glass rounded-full text-white/80 text-xs sm:text-sm hover:bg-white/20 transition-colors flex items-center gap-1"
+            className="px-3 py-1.5 lg:px-4 lg:py-2 glass rounded-full text-white/80 text-xs sm:text-sm lg:text-base hover:bg-white/20 transition-colors flex items-center gap-1"
           >
             <span className="text-yellow-400">📍</span>
             {city.name}
