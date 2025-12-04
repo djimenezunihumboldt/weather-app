@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Cloud, Sun, Snowflake, CloudLightning, Wind } from 'lucide-react';
+import { Sun, Snowflake, CloudLightning, Wind } from 'lucide-react';
 import type { WeatherConditionType } from '../types';
 
 interface WeatherBackgroundProps {
@@ -172,38 +172,10 @@ const StarsElements = () => (
   </>
 );
 
-const CloudsElements = () => (
-  <>
-    {[...Array(6)].map((_, i) => (
-      <motion.div
-        key={i}
-        animate={{
-          x: ['-10%', '110%'],
-        }}
-        transition={{
-          duration: 30 + i * 10,
-          repeat: Infinity,
-          ease: 'linear',
-          delay: i * 5,
-        }}
-        style={{
-          position: 'absolute',
-          top: `${10 + i * 12}%`,
-        }}
-      >
-        <Cloud
-          className={`text-white/30 ${
-            i % 2 === 0 ? 'w-32 h-32' : 'w-24 h-24'
-          }`}
-        />
-      </motion.div>
-    ))}
-  </>
-);
+const CloudsElements = () => null;
 
 const RainElements = () => (
   <>
-    <CloudsElements />
     {[...Array(50)].map((_, i) => (
       <motion.div
         key={i}
