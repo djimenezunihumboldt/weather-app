@@ -9,3 +9,7 @@ export { FavoritesList } from './FavoritesList';
 export { WeatherBackground } from './WeatherBackground';
 export { LoadingScreen } from './LoadingScreen';
 export { ErrorDisplay } from './ErrorDisplay';
+export { AirQuality } from './AirQuality';
+export { UVIndex } from './UVIndex';
+export { TemperatureChart } from './TemperatureChart';
+export { WeatherSummary } from './WeatherSummary';

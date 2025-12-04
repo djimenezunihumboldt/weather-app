@@ -1,6 +1,6 @@
 import { useQuery, type UseQueryOptions } from '@tanstack/react-query';
 import { useState, useCallback } from 'react';
-import { getCurrentWeather, getForecast, searchCities, reverseGeocode } from '../services';
+import { getCurrentWeather, getForecast, searchCities, reverseGeocode, getAirQuality } from '../services';
 import type { WeatherData, ForecastData, GeocodingResult, Language } from '../types';
 
 /**
@@ -66,6 +66,25 @@ export const useReverseGeocode = (lat: number | null, lon: number | null) => {
     enabled: lat !== null && lon !== null,
     staleTime: 60 * 60 * 1000, // 1 hour
     gcTime: 24 * 60 * 60 * 1000, // 24 hours
+  });
+};
+
+/**
+ * Hook to fetch air quality data
+ */
+export const useAirQuality = (
+  lat: number,
+  lon: number,
+  options?: Partial<UseQueryOptions<unknown>>
+) => {
+  return useQuery({
+    queryKey: ['airQuality', lat, lon],
+    queryFn: () => getAirQuality(lat, lon),
+    staleTime: 30 * 60 * 1000, // 30 minutes
+    gcTime: 60 * 60 * 1000, // 1 hour
+    refetchOnWindowFocus: false,
+    retry: 1,
+    ...options,
   });
 };
 

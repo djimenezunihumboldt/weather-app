@@ -12,8 +12,11 @@ import {
   WeatherBackground,
   LoadingScreen,
   ErrorDisplay,
+  AirQuality,
+  TemperatureChart,
+  WeatherSummary,
 } from './components';
-import { useCurrentWeather, useForecast, useGeolocation } from './hooks';
+import { useCurrentWeather, useForecast, useGeolocation, useAirQuality } from './hooks';
 import { useWeatherStore } from './store';
 import type { City, FavoriteCity, WeatherConditionType } from './types';
 import { mapWeatherCondition, isNightTime } from './utils';
@@ -75,6 +78,18 @@ function WeatherApp() {
     currentCity?.lat ?? 0,
     currentCity?.lon ?? 0,
     settings.language,
+    {
+      enabled: !!currentCity,
+    }
+  );
+
+  // Air quality data
+  const {
+    data: airQualityData,
+    isLoading: isAirQualityLoading,
+  } = useAirQuality(
+    currentCity?.lat ?? 0,
+    currentCity?.lon ?? 0,
     {
       enabled: !!currentCity,
     }
@@ -250,6 +265,17 @@ function WeatherApp() {
               {/* Current Weather */}
               <CurrentWeather data={weatherData} />
 
+              {/* Weather Summary */}
+              <WeatherSummary 
+                weatherData={weatherData} 
+                forecastData={forecastData ?? null} 
+              />
+
+              {/* Temperature Chart */}
+              {forecastData && (
+                <TemperatureChart data={forecastData.list} />
+              )}
+
               {/* Hourly Forecast */}
               {forecastData && (
                 <HourlyForecast data={forecastData.list} />
@@ -259,6 +285,12 @@ function WeatherApp() {
               {forecastData && (
                 <Forecast data={forecastData} />
               )}
+
+              {/* Air Quality */}
+              <AirQuality 
+                data={airQualityData as any} 
+                isLoading={isAirQualityLoading} 
+              />
 
               {/* Weather Details */}
               <WeatherDetails data={weatherData} />
