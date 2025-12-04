@@ -140,7 +140,7 @@ export interface AppSettings {
 // UI Types
 export type WeatherTheme = 'clear-day' | 'clear-night' | 'cloudy' | 'rainy' | 'snowy' | 'stormy' | 'foggy';
 
-export type WeatherCondition = 'clear' | 'clouds' | 'rain' | 'drizzle' | 'thunderstorm' | 'snow' | 'mist' | 'fog' | 'haze' | 'dust' | 'smoke';
+export type WeatherConditionType = 'clear' | 'clouds' | 'rain' | 'drizzle' | 'thunderstorm' | 'snow' | 'mist' | 'fog' | 'haze' | 'dust' | 'smoke';
 
 export type Language = 'es' | 'en';
 

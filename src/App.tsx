@@ -15,7 +15,7 @@ import {
 } from './components';
 import { useCurrentWeather, useForecast, useGeolocation } from './hooks';
 import { useWeatherStore } from './store';
-import type { City, FavoriteCity, WeatherCondition } from './types';
+import type { City, FavoriteCity, WeatherConditionType } from './types';
 import { mapWeatherCondition, isNightTime } from './utils';
 
 // Create Query Client
@@ -125,7 +125,7 @@ function WeatherApp() {
   }, [settings.autoRefresh, currentCity, handleRefresh]);
 
   // Determine weather condition for background
-  const weatherCondition: WeatherCondition = weatherData
+  const weatherCondition: WeatherConditionType = weatherData
     ? mapWeatherCondition(weatherData.weather[0].main)
     : 'clear';
 

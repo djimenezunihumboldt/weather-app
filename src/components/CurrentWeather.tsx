@@ -39,12 +39,10 @@ export const CurrentWeather = ({ data }: CurrentWeatherProps) => {
       if (fav) removeFavorite(fav.id);
     } else {
       addFavorite({
-        id: `${data.name}-${data.sys.country}-${Date.now()}`,
         name: data.name,
         country: data.sys.country,
         lat: data.coord.lat,
         lon: data.coord.lon,
-        addedAt: Date.now(),
       });
     }
   };

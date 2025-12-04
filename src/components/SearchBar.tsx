@@ -3,10 +3,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Search, X, MapPin, Clock, Star, Loader2 } from 'lucide-react';
 import { useSearchCities } from '../hooks';
 import { useWeatherStore } from '../store';
-import type { GeocodingResult } from '../types';
+import type { GeocodingResult, City } from '../types';
 
 interface SearchBarProps {
-  onSelectCity: (lat: number, lon: number, name: string, country: string) => void;
+  onSelectCity: (city: City) => void;
 }
 
 export const SearchBar = ({ onSelectCity }: SearchBarProps) => {
@@ -18,7 +18,14 @@ export const SearchBar = ({ onSelectCity }: SearchBarProps) => {
 
   const handleSelect = useCallback(
     (result: GeocodingResult) => {
-      onSelectCity(result.lat, result.lon, result.name, result.country);
+      const city: City = {
+        name: result.name,
+        country: result.country,
+        lat: result.lat,
+        lon: result.lon,
+        state: result.state,
+      };
+      onSelectCity(city);
       addToHistory(`${result.name}, ${result.country}`);
       setQuery('');
       setIsOpen(false);
@@ -127,7 +134,7 @@ export const SearchBar = ({ onSelectCity }: SearchBarProps) => {
                 {favorites.slice(0, 3).map((fav) => (
                   <button
                     key={fav.id}
-                    onClick={() => onSelectCity(fav.lat, fav.lon, fav.name, fav.country)}
+                    onClick={() => onSelectCity({ name: fav.name, country: fav.country, lat: fav.lat, lon: fav.lon })}
                     className="w-full flex items-center gap-3 px-3 py-3 hover:bg-white/10 rounded-xl transition-colors text-left"
                   >
                     <Star className="w-5 h-5 text-yellow-400 flex-shrink-0" fill="currentColor" />

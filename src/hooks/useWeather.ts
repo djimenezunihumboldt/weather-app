@@ -1,4 +1,4 @@
-import { useQuery, UseQueryOptions } from '@tanstack/react-query';
+import { useQuery, type UseQueryOptions } from '@tanstack/react-query';
 import { useState, useCallback } from 'react';
 import { getCurrentWeather, getForecast, searchCities, reverseGeocode } from '../services';
 import type { WeatherData, ForecastData, GeocodingResult, Language } from '../types';

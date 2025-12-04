@@ -1,9 +1,9 @@
 import { motion } from 'framer-motion';
-import { Cloud, CloudRain, Sun, Snowflake, CloudLightning, Wind } from 'lucide-react';
-import type { WeatherCondition } from '../types';
+import { Cloud, Sun, Snowflake, CloudLightning, Wind } from 'lucide-react';
+import type { WeatherConditionType } from '../types';
 
 interface WeatherBackgroundProps {
-  condition: WeatherCondition;
+  condition: WeatherConditionType;
   isDay: boolean;
 }
 
@@ -28,8 +28,8 @@ export const WeatherBackground = ({ condition, isDay }: WeatherBackgroundProps) 
   );
 };
 
-const getBackgroundGradient = (condition: WeatherCondition, isDay: boolean): string => {
-  const gradients: Record<WeatherCondition, { day: string; night: string }> = {
+const getBackgroundGradient = (condition: WeatherConditionType, isDay: boolean): string => {
+  const gradients: Record<WeatherConditionType, { day: string; night: string }> = {
     clear: {
       day: 'bg-gradient-to-br from-blue-400 via-sky-500 to-cyan-400',
       night: 'bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-800',
@@ -79,26 +79,26 @@ const getBackgroundGradient = (condition: WeatherCondition, isDay: boolean): str
   return gradients[condition]?.[isDay ? 'day' : 'night'] || gradients.clear[isDay ? 'day' : 'night'];
 };
 
-const WeatherElements = ({ condition, isDay }: { condition: WeatherCondition; isDay: boolean }) => {
-  switch (condition) {
-    case 'clear':
-      return isDay ? <SunElements /> : <StarsElements />;
-    case 'clouds':
-      return <CloudsElements />;
-    case 'rain':
-    case 'drizzle':
-      return <RainElements />;
-    case 'thunderstorm':
-      return <ThunderstormElements />;
-    case 'snow':
-      return <SnowElements />;
-    case 'mist':
-    case 'fog':
-    case 'haze':
-      return <MistElements />;
-    default:
-      return null;
+const WeatherElements = ({ condition, isDay }: { condition: WeatherConditionType; isDay: boolean }) => {
+  if (condition === 'clear') {
+    return isDay ? <SunElements /> : <StarsElements />;
   }
+  if (condition === 'clouds') {
+    return <CloudsElements />;
+  }
+  if (condition === 'rain' || condition === 'drizzle') {
+    return <RainElements />;
+  }
+  if (condition === 'thunderstorm') {
+    return <ThunderstormElements />;
+  }
+  if (condition === 'snow') {
+    return <SnowElements />;
+  }
+  if (condition === 'mist' || condition === 'fog' || condition === 'haze') {
+    return <MistElements />;
+  }
+  return null;
 };
 
 const SunElements = () => (
